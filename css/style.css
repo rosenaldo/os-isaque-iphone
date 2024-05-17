@@ -181,3 +181,11 @@ cursor: pointer;
         padding-right: 5rem;
     }
 }
+
+.logo-pdf {
+    display: none;
+}
+
+#termos {
+    display: none;
+}
