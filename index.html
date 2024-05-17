@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordem de Serviço</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+        integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+        crossorigin="anonymous"></script>
+    <script src="/js/script.js" defer></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-image">
+            <img src="/img/undraw_mobile_photos_psm5.svg" alt="logo">
+        </div>
+        <div class="form">
+            <form>
+                <div class="form-header">
+                    <div class="titulo">
+                        <h1>Ordem de Serviço</h1>
+                    </div>
+                    <div class="butao">
+                        <button type="submit" id="voltar">Voltar</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-box">
+                        <label for="total">Valor total:</label>
+                        <input type="text" id="total" placeholder="Valor do servico" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="desconto">Desconto:</label>
+                        <input type="text" id="desconto" placeholder="Desconto dado" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="nome">Nome do Cliente:</label>
+                        <input type="text" id="nome" placeholder="Informe o nome do cliente" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="telefone">Telefone do Cliente:</label>
+                        <input type="tel" id="telefone" placeholder="(XX) XXXX-XXXX" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="E-mail">Email do Cliente:</label>
+                        <input type="email" id="email" placeholder="Informeo o E-mail" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="marca">Marca do Celular:</label>
+                        <input type="text" id="marca" placeholder="A marca do aparelho" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="modelo">Modelo do Celular:</label>
+                        <input type="text" id="modelo" placeholder="Informe o modelo" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="imei">IMEI do Celular:</label>
+                        <input type="text" id="imei" placeholder="Informe o IMEI" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="defeito">Descrição do Defeito:</label>
+                        <textarea id="defeito" placeholder="O problema é..." required></textarea>
+                    </div>
+                    <div class="input-box">
+                        <label for="servicos">Serviços a serem Realizados:</label>
+                        <textarea id="servicos" placeholder="Será realizado..." required></textarea>
+                    </div>
+
+
+                </div>
+                <div class="gerar-os">
+                    <button type="submit" id="generate-PDF">Gerar Ordem de Serviço</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
