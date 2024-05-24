@@ -34,51 +34,62 @@
                 </div>
 
                 <div class="input-group">
+                                   
                     <div class="input-box">
-                        <label for="total">Valor total:</label>
-                        <input type="text" id="total" placeholder="Valor do servico" required>
+                        <label for="dtentrada">Data de entrada:</label>
+                        <input type="date" id="dtentrada">
                     </div>
+
                     <div class="input-box">
-                        <label for="desconto">Desconto:</label>
-                        <input type="text" id="desconto" placeholder="Desconto dado" required>
+                        <label for="dtsaida">Data de saída:</label>
+                        <input type="date" id="dtsaida">
                     </div>
+
                     <div class="input-box">
                         <label for="nome">Nome do Cliente:</label>
-                        <input type="text" id="nome" placeholder="Informe o nome do cliente" required>
+                        <input type="text" id="nome" placeholder="Informe o nome do cliente">
                     </div>
                     <div class="input-box">
                         <label for="telefone">Telefone do Cliente:</label>
-                        <input type="tel" id="telefone" placeholder="(XX) XXXX-XXXX" required>
+                        <input type="tel" id="telefone" placeholder="(XX) XXXX-XXXX">
                     </div>
                     <div class="input-box">
                         <label for="E-mail">Email do Cliente:</label>
-                        <input type="email" id="email" placeholder="Informeo o E-mail" required>
+                        <input type="email" id="email" placeholder="Informeo o E-mail">
                     </div>
                     <div class="input-box">
                         <label for="marca">Marca do Celular:</label>
-                        <input type="text" id="marca" placeholder="A marca do aparelho" required>
+                        <input type="text" id="marca" placeholder="A marca do aparelho">
                     </div>
                     <div class="input-box">
                         <label for="modelo">Modelo do Celular:</label>
-                        <input type="text" id="modelo" placeholder="Informe o modelo" required>
+                        <input type="text" id="modelo" placeholder="Informe o modelo">
                     </div>
                     <div class="input-box">
                         <label for="imei">IMEI do Celular:</label>
-                        <input type="text" id="imei" placeholder="Informe o IMEI" required>
+                        <input type="text" id="imei" placeholder="Informe o IMEI">
                     </div>
                     <div class="input-box">
                         <label for="defeito">Descrição do Defeito:</label>
-                        <textarea id="defeito" placeholder="O problema é..." required></textarea>
+                        <textarea id="defeito" placeholder="O problema é..."></textarea>
                     </div>
                     <div class="input-box">
                         <label for="servicos">Serviços a serem Realizados:</label>
-                        <textarea id="servicos" placeholder="Será realizado..." required></textarea>
+                        <textarea id="servicos" placeholder="Será realizado..."></textarea>
                     </div>
+                    <div class="input-box">
+                        <label for="total">Valor total:</label>
+                        <input type="text" id="total" placeholder="Valor do servico">
+                    </div>
+
+                     
                                        
-                </div>
+                </div>      
+                
                 <div class="gerar-os">
                     <button type="submit" id="generate-PDF">Gerar Ordem de Serviço</button>
                 </div>
+               
             </form>
         </div>
 

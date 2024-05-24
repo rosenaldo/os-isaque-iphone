@@ -1,6 +1,5 @@
 document.getElementById('generate-PDF').addEventListener('click', function () {
     const valorTotal = document.getElementById('total').value;
-    const desconto = document.getElementById('desconto').value;
     const nome = document.getElementById('nome').value;
     const telefone = document.getElementById('telefone').value;
     const email = document.getElementById('email').value;
@@ -11,11 +10,13 @@ document.getElementById('generate-PDF').addEventListener('click', function () {
     const servicos = document.getElementById('servicos').value;
     const imagemPDF = document.getElementById('img-pdf');
     const termos = document.getElementById('termos');
+    const dtentrada = document.getElementById('dtentrada').value;
+    const dtsaida = document.getElementById('dtsaida').value;
 
-    gerarOrdemServico(nome, telefone, email, marca, modelo, imei, defeito, servicos, valorTotal,desconto,imagemPDF,termos);
+    gerarOrdemServico(nome, telefone, email, marca, modelo, imei, defeito, servicos, valorTotal,imagemPDF,termos,dtentrada,dtsaida);
 });
 
-function gerarOrdemServico(nome, telefone, email, marca, modelo, imei, defeito, servicos,valorTotal,desconto,imagemPDF,termos) {
+function gerarOrdemServico(nome, telefone, email, marca, modelo, imei, defeito, servicos,valorTotal,imagemPDF,termos,dtentrada,dtsaida) {
     const doc = new jsPDF();
     // Adiciona a imagem no cabeçalho
     doc.setFillColor(211, 211, 211);     
@@ -29,10 +30,17 @@ doc.setFontType("bold");
 doc.text(`Ordem de Serviço - Manutenção de Celular`, 80, 10);
 doc.setFontType("normal");
 
+
 // CNPJ
 doc.setFontSize(12);
 doc.text(`CNPJ: 28.649.899/0001-97`, 145, 25);
 doc.text(`Contato: 84 9 9820-0953`, 145, 20);
+
+//data
+const dataEntrada = formatDate(dtentrada);
+doc.text(`Data de entrada: ${dataEntrada}`, 145, 30);
+const dataSaida = formatDate(dtsaida);
+doc.text(`Data de saída: ${dataSaida}`, 145, 35);
 
 // Informações do Cliente
 doc.text(`Cliente: ${nome}`, 10, 50);
@@ -49,8 +57,7 @@ doc.text(`Serviços a serem Realizados:`, 10, 100);
 doc.text(`${servicos}`, 90, 100);
 
 // Valor Total e Desconto
-doc.text(`Valor do Serviço: R$ ${valorTotal}`, 90, 120);
-doc.text(`Desconto: R$ ${desconto}`, 10, 120);
+doc.text(`Valor do Serviço: R$ ${valorTotal}`, 10, 120);
 
 // Termos e Condições
 doc.setFontSize(10); 
@@ -81,3 +88,11 @@ document.getElementById('telefone').addEventListener('input', function (event) {
 
     event.target.value = telefone;
 });
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
