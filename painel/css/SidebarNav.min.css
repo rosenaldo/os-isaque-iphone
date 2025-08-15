@@ -3,7 +3,7 @@
 }
 
 .sidebar-left {
-    background-color: #100425;
+    background-color: #222d32;
     margin: 0;
     border: none;
     border-radius: 0
@@ -40,13 +40,13 @@
 .sidebar-menu>li:hover>a,
 .sidebar-menu>li.active>a {
     color: #fff;
-    background: #5B21B6;
-    border-left-color: #fff
+    background: #1e282c;
+    border-left-color: #3c8dbc
 }
 
 .sidebar-menu>li>.treeview-menu {
     margin: 0 1px;
-    background: #7354a5
+    background: #2c3b41
 }
 
 .sidebar-menu>li .label,

@@ -10,6 +10,14 @@ if($categoria != ""){
 	$query = $pdo->query("SELECT * from $tabela order by id desc");
 }
 
+$fornecedor = @$_POST['p2'];
+
+if($fornecedor != ""){
+	$query = $pdo->query("SELECT * from $tabela where fornecedor = '$fornecedor' order by id desc");
+}else{
+	$query = $pdo->query("SELECT * from $tabela order by id desc");
+}
+
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $linhas = @count($res);
 if($linhas > 0){
@@ -20,10 +28,12 @@ echo <<<HTML
 	<tr> 
 	<th>Nome</th>	
 	<th class="esc">Categoria</th>	
+	<th class="esc">Fornecedor</th>
 	<th class="esc">Valor Compra</th>	
 	<th class="esc">Valor Venda</th>
 	<th class="esc">Estoque</th>	
 	<th class="esc">Nível Mínimo</th>		
+	<th class="esc">IMEI</th>		
 	<th class="esc">Foto</th>	
 	<th>Ações</th>
 	</tr> 
@@ -37,8 +47,10 @@ for($i=0; $i<$linhas; $i++){
 	$categoria = $res[$i]['categoria'];
 	$valor_venda = $res[$i]['valor_venda'];
 	$valor_compra = $res[$i]['valor_compra'];
+	$fornecedor = $res[$i]['fornecedor'];
 	$estoque = $res[$i]['estoque'];
 	$nivel_estoque = $res[$i]['nivel_estoque'];	
+	$imei = $res[$i]['imei'];	
 	$foto = $res[$i]['foto'];	
 	$ativo = $res[$i]['ativo'];
 	
@@ -67,6 +79,15 @@ for($i=0; $i<$linhas; $i++){
 		$classe_estoque = 'text-danger';
 	}
 
+$query3 = $pdo->query("SELECT * FROM fornecedores WHERE id = '$fornecedor'");
+$res3 = $query3 ? $query3->fetchAll(PDO::FETCH_ASSOC) : [];
+
+// Solução robusta com verificação em várias camadas
+$nome_fornecedor = 'Sem fornecedor'; // Valor padrão
+
+if(!empty($res3) && isset($res3[0]['nome'])) {
+    $nome_fornecedor = $res3[0]['nome'];
+}
 
 echo <<<HTML
 <tr style="color:{$classe_ativo}">
@@ -75,13 +96,15 @@ echo <<<HTML
 {$nome}
 </td>
 <td class="esc">{$nome_categoria}</td>
+<td class="esc">{$nome_fornecedor}</td>
 <td class="esc">R$ {$valor_compraF}</td>
 <td class="esc text-verde">R$ {$valor_vendaF}</td>
 <td class="esc {$classe_estoque}">{$estoque}</td>
 <td class="esc">{$nivel_estoque}</td>
+<td class="esc">{$imei}</td>
 <td class="esc"><img src="images/produtos/{$foto}" width="25px"></td>
 <td>
-	<big><a href="#" onclick="editar('{$id}','{$nome}','{$categoria}','{$valor_compra}','{$valor_venda}','{$estoque}','{$nivel_estoque}','{$foto}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+	<big><a href="#" onclick="editar('{$id}','{$nome}','{$categoria}','{$fornecedor}' ,'{$valor_compra}','{$valor_venda}','{$estoque}','{$nivel_estoque}', '{$imei}' ,'{$foto}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
 	<li class="dropdown head-dpdn2" style="display: inline-block;">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><big><i class="fa fa-trash-o text-danger"></i></big></a>
@@ -136,17 +159,19 @@ HTML;
 </script>
 
 <script type="text/javascript">
-	function editar(id, nome, categoria, compra, venda, estoque, nivel, foto){
+	function editar(id, nome, categoria, fornecedor, compra, venda, estoque, nivel, imei, foto){
 		$('#mensagem').text('');
     	$('#titulo_inserir').text('Editar Registro');
 
     	$('#id').val(id);
     	$('#nome').val(nome);
     	$('#categoria').val(categoria).change();
+    	$('#fornecedor').val(fornecedor).change();
     	$('#valor_compra').val(compra);
     	$('#valor_venda').val(venda);
     	$('#estoque').val(estoque);
     	$('#nivel_estoque').val(nivel);
+    	$('#imei').val(imei);
     	$('#foto').val(''); 
     	
     	$('#target').attr('src', 'images/produtos/'+foto);
@@ -162,6 +187,7 @@ HTML;
     	$('#nivel_estoque').val('');
     	$('#valor_venda').val('');
     	$('#valor_compra').val('');
+    	$('#imei').val('');
     	
     	$('#target').attr('src', 'images/produtos/sem-foto.jpg'); 
     	$('#foto').val('');   	

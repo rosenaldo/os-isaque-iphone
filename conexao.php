@@ -26,7 +26,7 @@ try {
 $url_sistema = "https://$_SERVER[HTTP_HOST]/";
 $url = explode("//", $url_sistema);
 if($url[1] == 'localhost/'){
-	$url_sistema = "http://$_SERVER[HTTP_HOST]/isaqueiphone/";
+	$url_sistema = "http://$_SERVER[HTTP_HOST]/isaque.iphone/";
 }
 
 // TODO: variaveis globais

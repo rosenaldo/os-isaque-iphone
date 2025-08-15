@@ -79,6 +79,7 @@ if($marca_dagua == 'Sim'){ ?>
 					<td style="width:10%">NÍVEL ESTOQUE</td>
 					<td style="width:17%">FORNECEDOR</td>	
 					<td style="width:15%">CATEGORIA</td>
+					<td style="width:15%">IMEI</td>
 					<td style="width:7%">ATIVO</td>	
 					
 				</tr>
@@ -128,6 +129,7 @@ for($i=0; $i<$linhas; $i++){
 	$foto = $res[$i]['foto'];	
 	$ativo = $res[$i]['ativo'];
 	$fornecedor = $res[$i]['fornecedor'];
+	$imei = $res[$i]['imei'];
 	
 	$valor_vendaF = number_format($valor_venda, 2, ',', '.');  
 	$valor_compraF = number_format($valor_compra, 2, ',', '.');  
@@ -168,6 +170,7 @@ $nome_forn = @$res2[0]['nome'];
 <td style="width:10%;"><?php echo $nivel_estoque ?></td>
 <td style="width:17%"><?php echo $nome_forn ?></td>
 <td style="width:15%"><?php echo $nome_categoria ?></td>
+<td style="width:15%"><?php echo $imei ?></td>
 <td style="width:7%;"><?php echo $ativo ?> </td>
 
     </tr>

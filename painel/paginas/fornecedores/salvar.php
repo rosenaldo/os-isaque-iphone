@@ -7,6 +7,7 @@ $email = $_POST['email'];
 $telefone = $_POST['telefone'];
 $endereco = $_POST['endereco'];
 $pix = $_POST['pix'];
+$cpf_cnpj = $_POST['cpf_cnpj'];
 $id = $_POST['id'];
 
 //validacao email
@@ -30,16 +31,17 @@ if(@count($res) > 0 and $id != $id_reg){
 }
 
 if($id == ""){
-$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, email = :email, telefone = :telefone, data = curDate(), endereco = :endereco, pix = :pix ");
+$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, email = :email, telefone = :telefone, data = curDate(), endereco = :endereco, pix = :pix, cpf_cnpj = :cpf_cnpj = :cpf_cnpj");
 	
 }else{
-$query = $pdo->prepare("UPDATE $tabela SET nome = :nome, email = :email, telefone = :telefone, endereco = :endereco, pix = :pix where id = '$id'");
+$query = $pdo->prepare("UPDATE $tabela SET nome = :nome, email = :email, telefone = :telefone, endereco = :endereco, pix = :pix, cpf_cnpj = :cpf_cnpj where id = '$id'");
 }
 $query->bindValue(":nome", "$nome");
 $query->bindValue(":email", "$email");
 $query->bindValue(":telefone", "$telefone");
 $query->bindValue(":endereco", "$endereco");
 $query->bindValue(":pix", "$pix");
+$query->bindValue(":cpf_cnpj", "$cpf_cnpj");
 $query->execute();
 
 echo 'Salvo com Sucesso';

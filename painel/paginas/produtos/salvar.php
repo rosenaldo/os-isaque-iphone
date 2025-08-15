@@ -4,10 +4,12 @@ require_once("../../../conexao.php");
 
 $nome = $_POST['nome'];
 $categoria = $_POST['categoria'];
+$fornecedor = $_POST['fornecedor'];
 $valor_compra = $_POST['valor_compra'];
 $valor_venda = $_POST['valor_venda'];
 $estoque = $_POST['estoque'];
 $nivel_estoque = $_POST['nivel_estoque'];
+$imei = $_POST['imei'];
 $id = $_POST['id'];
 
 $valor_compra = str_replace(',', '.', $valor_compra);
@@ -60,17 +62,19 @@ if($nivel_estoque == ""){
 }
 
 if($id == ""){
-$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, categoria = :categoria, valor_compra = :valor_compra, valor_venda = :valor_venda, estoque = :estoque, nivel_estoque = :nivel_estoque, foto = '$foto', ativo = 'Sim' ");
+$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, categoria = :categoria, fornecedor = :fornecedor, valor_compra = :valor_compra, valor_venda = :valor_venda, estoque = :estoque, nivel_estoque = :nivel_estoque, imei = :imei, foto = '$foto', ativo = 'Sim' ");
 	
 }else{
-$query = $pdo->prepare("UPDATE $tabela SET nome = :nome, categoria = :categoria, valor_compra = :valor_compra, valor_venda = :valor_venda, estoque = :estoque, nivel_estoque = :nivel_estoque, foto = '$foto' where id = '$id'");
+$query = $pdo->prepare("UPDATE $tabela SET nome = :nome, categoria = :categoria, fornecedor = :fornecedor, valor_compra = :valor_compra, valor_venda = :valor_venda, estoque = :estoque, nivel_estoque = :nivel_estoque, imei = :imei, foto = '$foto' where id = '$id'");
 }
 $query->bindValue(":nome", "$nome");
 $query->bindValue(":categoria", "$categoria");
+$query->bindValue(":fornecedor", "$fornecedor");
 $query->bindValue(":valor_compra", "$valor_compra");
 $query->bindValue(":valor_venda", "$valor_venda");
 $query->bindValue(":estoque", "$estoque");
 $query->bindValue(":nivel_estoque", "$nivel_estoque");
+$query->bindValue(":imei", "$imei");
 $query->execute();
 
 echo 'Salvo com Sucesso';

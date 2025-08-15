@@ -12,6 +12,7 @@ echo <<<HTML
 	<thead> 
 	<tr> 
 	<th>Nome</th>	
+	<th class="esc">CPF/CNPJ</th>
 	<th class="esc">Telefone</th>	
 	<th class="esc">Email</th>			
 	<th class="esc">Pix</th>
@@ -25,12 +26,13 @@ HTML;
 for($i=0; $i<$linhas; $i++){
 	$id = $res[$i]['id'];
 	$nome = $res[$i]['nome'];
+	$cpf_cnpj = $res[$i]['cpf_cnpj'];
 	$telefone = $res[$i]['telefone'];
 	$email = $res[$i]['email'];	
-	$endereco = $res[$i]['endereco'];
-	
-	$data = $res[$i]['data'];
 	$pix = $res[$i]['pix'];
+	$endereco = $res[$i]['endereco'];
+	$data = $res[$i]['data'];
+	
 
 	$dataF = implode('/', array_reverse(@explode('-', $data)));
 
@@ -42,12 +44,13 @@ echo <<<HTML
 <input type="checkbox" id="seletor-{$id}" class="form-check-input" onchange="selecionar('{$id}')">
 {$nome}
 </td>
+<td class="esc">{$cpf_cnpj}</td>
 <td class="esc">{$telefone}</td>
 <td class="esc">{$email}</td>
-<td class="esc">{$pix}</td>
+<td class="esc">{$pix}</td>	
 <td class="esc">{$dataF}</td>
 <td>
-	<big><a href="#" onclick="editar('{$id}','{$nome}','{$email}','{$telefone}','{$endereco}','{$pix}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
+	<big><a href="#" onclick="editar('{$id}','{$nome}', '{$cpf_cnpj}', '{$telefone}', '{$email}','{$endereco}','{$pix}')" title="Editar Dados"><i class="fa fa-edit text-primary"></i></a></big>
 
 	<li class="dropdown head-dpdn2" style="display: inline-block;">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><big><i class="fa fa-trash-o text-danger"></i></big></a>
@@ -61,7 +64,7 @@ echo <<<HTML
 		</ul>
 </li>
 
-<big><a href="#" onclick="mostrar('{$nome}','{$email}','{$telefone}','{$endereco}','{$pix}','{$dataF}')" title="Mostrar Dados"><i class="fa fa-info-circle text-primary"></i></a></big>
+<big><a href="#" onclick="mostrar('{$nome}','{$cpf_cnpj}' ,'{$email}','{$telefone}','{$endereco}','{$pix}','{$dataF}')" title="Mostrar Dados"><i class="fa fa-info-circle text-primary"></i></a></big>
 
 
 
@@ -99,7 +102,7 @@ HTML;
 </script>
 
 <script type="text/javascript">
-	function editar(id, nome, email, telefone, endereco, pix){
+	function editar(id, nome, email, telefone, endereco, pix,cpf_cnpj){
 		$('#mensagem').text('');
     	$('#titulo_inserir').text('Editar Registro');
 
@@ -109,18 +112,20 @@ HTML;
     	$('#telefone').val(telefone);
     	$('#endereco').val(endereco);    	
     	$('#pix').val(pix);
+		$('#cpf_cnpj').val(cpf_cnpj);
 
     	$('#modalForm').modal('show');
 	}
 
 
-	function mostrar(nome, email, telefone, endereco, pix, data){
+	function mostrar(nome, email, telefone, endereco, pix, cpf_cnpj, data){
 		    	
     	$('#titulo_dados').text(nome);
     	$('#email_dados').text(email);
     	$('#telefone_dados').text(telefone);
     	$('#endereco_dados').text(endereco);
     	$('#pix_dados').text(pix);
+		$('#cpf_cnpj_dados').text(cpf_cnpj);
     	$('#data_dados').text(data);
     	
     	$('#modalDados').modal('show');
@@ -133,6 +138,7 @@ HTML;
     	$('#telefone').val('');
     	$('#endereco').val('');
     	$('#pix').val('');
+		$('#cpf_cnpj').val('');
 
     	$('#ids').val('');
     	$('#btn-deletar').hide();	

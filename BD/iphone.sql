@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26/05/2025 às 17:06
+-- Tempo de geração: 15/08/2025 às 21:52
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -89,6 +89,14 @@ CREATE TABLE `categorias` (
   `foto` varchar(100) NOT NULL,
   `ativo` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nome`, `foto`, `ativo`) VALUES
+(8, 'qqqqqqq', 'sem-foto.jpg', 'Sim'),
+(9, 'categoria teste', 'sem-foto.jpg', 'Sim');
 
 -- --------------------------------------------------------
 
@@ -217,8 +225,17 @@ CREATE TABLE `fornecedores` (
   `email` varchar(50) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `pix` varchar(50) DEFAULT NULL,
-  `data` date DEFAULT NULL
+  `data` date DEFAULT NULL,
+  `cpf_cnpj` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `fornecedores`
+--
+
+INSERT INTO `fornecedores` (`id`, `nome`, `telefone`, `email`, `endereco`, `pix`, `data`, `cpf_cnpj`) VALUES
+(4, 'junior', '(84) 99834-2359', '', 'joserdasjunior@gmail.com', 'r', '2025-08-14', '2222222222222222'),
+(5, 'cicero', '(84) 99834-1255', 'marcos@adm.com.br', 'isa@ss', '', '2025-08-14', '111.111.111-11');
 
 -- --------------------------------------------------------
 
@@ -259,6 +276,13 @@ CREATE TABLE `itens_venda` (
   `funcionario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Despejando dados para a tabela `itens_venda`
+--
+
+INSERT INTO `itens_venda` (`id`, `produto`, `valor`, `quantidade`, `total`, `id_venda`, `funcionario`) VALUES
+(124, 16, 1.00, 1, 1.00, 183, 29);
+
 -- --------------------------------------------------------
 
 --
@@ -285,6 +309,13 @@ CREATE TABLE `orcamentos` (
   `saida` varchar(50) DEFAULT NULL,
   `vendedor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `orcamentos`
+--
+
+INSERT INTO `orcamentos` (`id`, `cliente`, `data`, `data_entrega`, `dias_validade`, `valor`, `desconto`, `tipo_desconto`, `subtotal`, `obs`, `status`, `total_produtos`, `total_servicos`, `funcionario`, `frete`, `valor_entrada`, `saida`, `vendedor`) VALUES
+(172, 8, '2025-08-15', '2025-08-15', NULL, 1.00, 0, '%', 1.00, '', 'Aprovado', 1.00, 0.00, 29, 0.00, 0.00, 'pix', 0);
 
 -- --------------------------------------------------------
 
@@ -390,8 +421,22 @@ CREATE TABLE `produtos` (
   `ativo` varchar(5) DEFAULT NULL,
   `nivel_estoque` int(11) DEFAULT NULL,
   `categoria` int(11) DEFAULT NULL,
-  `fornecedor` int(11) DEFAULT NULL
+  `fornecedor` int(11) DEFAULT NULL,
+  `imei` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `produtos`
+--
+
+INSERT INTO `produtos` (`id`, `nome`, `valor_compra`, `valor_venda`, `estoque`, `foto`, `ativo`, `nivel_estoque`, `categoria`, `fornecedor`, `imei`) VALUES
+(16, 'qqqqq', 0.00, 1.00, 0, 'sem-foto.jpg', 'Sim', 1, 8, 0, ''),
+(17, 'aa', 0.00, 11.00, 111, 'sem-foto.jpg', 'Sim', 1, 8, 4, ''),
+(18, 'asasas', 5.00, 1.00, 1, 'sem-foto.jpg', 'Sim', 1, 8, 4, ''),
+(19, 'fdsfasdfadfas', 121.00, 121.00, 2121, 'sem-foto.jpg', 'Sim', 11122, 8, 4, ''),
+(20, 'teste', 4.00, 4.00, 5, 'sem-foto.jpg', 'Sim', 1, 8, 0, ''),
+(21, 'aafasd', 4.00, 5.00, 12, 'sem-foto.jpg', 'Sim', 21, 8, 5, '1'),
+(22, 'micarla', 5.00, 11.00, 11, 'sem-foto.jpg', 'Sim', 11, 9, 5, 'junior');
 
 -- --------------------------------------------------------
 
@@ -494,7 +539,8 @@ INSERT INTO `produtos_orc` (`id`, `produto`, `orcamento`, `funcionario`, `quanti
 (240, 13, NULL, 29, 1, 389.00, 389.00, 31),
 (241, 15, NULL, 29, 1, 490.00, 490.00, 32),
 (242, 15, 170, 29, 1, 490.00, 490.00, NULL),
-(243, 13, 171, 29, 1, 389.00, 389.00, NULL);
+(243, 13, 171, 29, 1, 389.00, 389.00, NULL),
+(244, 16, 172, 29, 1, 1.00, 1.00, NULL);
 
 -- --------------------------------------------------------
 
@@ -527,6 +573,13 @@ CREATE TABLE `receber` (
   `parcela` int(11) DEFAULT NULL,
   `valor_entrada` decimal(8,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `receber`
+--
+
+INSERT INTO `receber` (`id`, `descricao`, `cliente`, `valor`, `data_lanc`, `data_venc`, `data_pgto`, `usuario_lanc`, `usuario_pgto`, `frequencia`, `saida`, `arquivo`, `pago`, `obs`, `referencia`, `id_ref`, `desconto`, `troco`, `hora`, `cancelada`, `vendedor`, `parcela`, `valor_entrada`) VALUES
+(183, 'Nova Venda', 8, 1.00, '2025-08-15', '2025-08-15', '2025-08-15', 29, 29, NULL, 'pix', 'sem-foto.png', 'Sim', NULL, 'Venda', 0, 0.00, NULL, '16:42:49', NULL, 0, NULL, 0.00);
 
 -- --------------------------------------------------------
 
@@ -626,7 +679,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `senha_crip`, `nivel`, `ativo`, `telefone`, `endereco`, `foto`, `data`, `comissao`, `id_ref`, `chave_pix`) VALUES
-(29, 'Isaque iPhone', 'isaqueiphone2@gmail.com', '', '$2y$10$ysutipNTzumitDM8LcbIUeWjQifJ4LcZFsShBzMoZNonJK2TrrKUq', 'Administrador', 'Sim', '(84) 99820-0953', '', '26-05-2025-11-04-59-perf.png', '2024-06-22', NULL, NULL, NULL);
+(29, 'Isaque iPhone', 'isaqueiphone2@gmail.com', '', '$2y$10$bqz6AiNqYUXhCpnX.UH3BevGkpuJbUt6b4paCnwHoN5EgtdGLReZK', 'Administrador', 'Sim', '(84) 99820-0953', '', '07-07-2025-11-24-56-perf.png', '2024-06-22', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -843,7 +896,7 @@ ALTER TABLE `cargos`
 -- AUTO_INCREMENT de tabela `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `clientes`
@@ -873,7 +926,7 @@ ALTER TABLE `formas_pgto`
 -- AUTO_INCREMENT de tabela `fornecedores`
 --
 ALTER TABLE `fornecedores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `frequencias`
@@ -891,13 +944,13 @@ ALTER TABLE `grupo_acessos`
 -- AUTO_INCREMENT de tabela `itens_venda`
 --
 ALTER TABLE `itens_venda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
 -- AUTO_INCREMENT de tabela `orcamentos`
 --
 ALTER TABLE `orcamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
 
 --
 -- AUTO_INCREMENT de tabela `os`
@@ -915,19 +968,19 @@ ALTER TABLE `pagar`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `produtos_orc`
 --
 ALTER TABLE `produtos_orc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 
 --
 -- AUTO_INCREMENT de tabela `receber`
 --
 ALTER TABLE `receber`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT de tabela `saidas`
