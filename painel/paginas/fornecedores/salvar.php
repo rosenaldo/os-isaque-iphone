@@ -31,7 +31,7 @@ if(@count($res) > 0 and $id != $id_reg){
 }
 
 if($id == ""){
-$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, email = :email, telefone = :telefone, data = curDate(), endereco = :endereco, pix = :pix, cpf_cnpj = :cpf_cnpj = :cpf_cnpj");
+$query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, email = :email, telefone = :telefone, data = curDate(), endereco = :endereco, pix = :pix, cpf_cnpj = :cpf_cnpj");
 	
 }else{
 $query = $pdo->prepare("UPDATE $tabela SET nome = :nome, email = :email, telefone = :telefone, endereco = :endereco, pix = :pix, cpf_cnpj = :cpf_cnpj where id = '$id'");

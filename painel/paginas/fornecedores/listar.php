@@ -102,30 +102,31 @@ HTML;
 </script>
 
 <script type="text/javascript">
-	function editar(id, nome, email, telefone, endereco, pix,cpf_cnpj){
+	function editar(id, nome, cpf_cnpj, telefone, email, endereco, pix){
 		$('#mensagem').text('');
     	$('#titulo_inserir').text('Editar Registro');
 
     	$('#id').val(id);
     	$('#nome').val(nome);
+		$('#cpf_cnpj').val(cpf_cnpj);
     	$('#email').val(email);
     	$('#telefone').val(telefone);
     	$('#endereco').val(endereco);    	
     	$('#pix').val(pix);
-		$('#cpf_cnpj').val(cpf_cnpj);
+
 
     	$('#modalForm').modal('show');
 	}
 
 
-	function mostrar(nome, email, telefone, endereco, pix, cpf_cnpj, data){
+	function mostrar(nome, cpf_cnpj, email, telefone, endereco, pix, data){
 		    	
     	$('#titulo_dados').text(nome);
+		$('#cpf_cnpj_dados').text(cpf_cnpj);
     	$('#email_dados').text(email);
     	$('#telefone_dados').text(telefone);
     	$('#endereco_dados').text(endereco);
     	$('#pix_dados').text(pix);
-		$('#cpf_cnpj_dados').text(cpf_cnpj);
     	$('#data_dados').text(data);
     	
     	$('#modalDados').modal('show');

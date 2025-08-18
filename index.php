@@ -11,49 +11,6 @@ if($linhas == 0){
 
 $data_atual = date('Y-m-d');
 //percorrer as contas para gerar as cobranças
-if($cobranca_auto == 'Sim' and strtotime($data_cobranca) != strtotime($data_atual) and $api_whatsapp == 'Sim'){
-
-	$query = $pdo->query("SELECT * from receber where data_venc <= curDate() and pago = 'Não' and cliente > 0 order by id asc ");
-	$res = $query->fetchAll(PDO::FETCH_ASSOC);
-	$total_reg = @count($res);
-	if($total_reg > 0){
-		for($i=0; $i < $total_reg; $i++){
-			$descricao = $res[$i]['descricao'];
-			$cliente = $res[$i]['cliente'];
-			$valor = $res[$i]['valor'];			
-			$data_venc = $res[$i]['data_venc'];
-
-			$data_vencF = implode('/', array_reverse(explode('-', $data_venc)));
-			$valorF = number_format($valor, 2, ',', '.');
-
-			$query2 = $pdo->query("SELECT * FROM clientes where id = '$cliente'");
-			$res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-			if(@count($res2) > 0){
-				$nome_cliente = $res2[0]['nome'];				
-				$tel_cliente = $res2[0]['telefone'];
-			}
-
-			if(strtotime($data_venc) == strtotime($data_atual)){
-				$mensagem = '_Você tem uma conta à Pagar Hoje '.$nome_sistema.'_ %0A';
-			}else{
-				$mensagem = '_Você tem uma conta Vencida '.$nome_sistema.'_ %0A';
-			}
-
-
-			//api whats			
-				$telefone_envio = '55'.preg_replace('/[ ()-]+/' , '' , $tel_cliente);			
-				
-					$mensagem .= 'Nome: *'.$nome_cliente.'* %0A';
-					$mensagem .= 'Valor: *R$ '.$valorF.'* %0A';
-					$mensagem .= 'Data de Vencimento: *'.$data_vencF.'* %0A%0A';
-					$mensagem .= '_Entre em contato conosco para acertar o pagamento!_ %0A';
-
-				require('apis/api_texto.php');
-		}	
-	}
-
-	$pdo->query("UPDATE config SET data_cobranca = curDate()");
-}
 
  ?>
  <!DOCTYPE html>
